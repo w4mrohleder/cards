@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux'
 import { StackNavigator } from 'react-navigation'
@@ -6,6 +6,7 @@ import { View, StatusBar } from 'react-native'
 import { Constants } from 'expo'
 
 import reducer from './reducers'
+import { setLocalNotification } from './utils/helpers'
 import Decks from './components/Decks'
 import AddDeck from './components/AddDeck'
 import Deck from './components/Deck'
@@ -60,7 +61,11 @@ const MainNavigator = StackNavigator(
   }
 )
 
-export default class App extends React.Component {
+export default class App extends Component {
+  componentDidMount () {
+    setLocalNotification()
+  }
+
   render () {
     return (
       <Provider store={createStore(reducer)}>

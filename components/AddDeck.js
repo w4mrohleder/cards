@@ -28,8 +28,6 @@ class AddDeck extends Component {
     return (
       <View style={styles.container}>
 
-        {/* <Text>Create new deck</Text> */}
-
         <TextInput
           style={styles.input}
           onChangeText={title => this.setState({ title })}
@@ -51,19 +49,5 @@ function mapStateToProps (state) {
     decks: state.decks
   }
 }
-
-// function mapDispatchToProps (dispatch, { navigation }) {
-//   const { deck } = navigation.state.params
-
-//   return {
-//     // remove: () =>
-//     //   dispatch(
-//     //     addEntry({
-//     //       [entryId]: timeToString() === entryId ? getDailyReminderValue() : null
-//     //     })
-//     //   ),
-//     // goBack: () => navigation.goBack()
-//   }
-// }
 
 export default connect(mapStateToProps)(AddDeck)

@@ -19,7 +19,6 @@ class Decks extends Component {
 
   render () {
     const { decks } = this.props
-    console.log('Decks.js decks: ', decks)
 
     return (
       <ScrollView contentContainerStyle={[{ alignItems: 'stretch', padding: 10 }]}>

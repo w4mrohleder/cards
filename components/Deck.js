@@ -57,18 +57,4 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch, { navigation }) {
-  const { deck } = navigation.state.params
-
-  return {
-    // remove: () =>
-    //   dispatch(
-    //     addEntry({
-    //       [entryId]: timeToString() === entryId ? getDailyReminderValue() : null
-    //     })
-    //   ),
-    // goBack: () => navigation.goBack()
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Deck)
+export default connect(mapStateToProps)(Deck)

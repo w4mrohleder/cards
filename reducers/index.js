@@ -6,7 +6,6 @@ function decks (state = {}, { type, payload }) {
       return { ...state, ...payload }
 
     case ADD_ENTRY:
-      console.log('payload.entry:', payload.entry)
       return { ...state, ...payload.entry }
 
     default:

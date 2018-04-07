@@ -3,22 +3,7 @@ import { AsyncStorage, Text, View, TextInput, Platform, TouchableOpacity } from 
 import { connect } from 'react-redux'
 
 import styles from '../utils/styles'
-
-class Card extends Component {
-  // state = { flipped: false }
-
-  render () {
-    const { q, flipped } = this.props
-
-    return (
-      <View style={{ marginBottom: 20 }}>
-        <Text>{flipped ? q.answer : q.question}</Text>
-      </View>
-    )
-  }
-}
-
-const QuizComplete = <View>COMPLETE: %</View>
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
 class Quiz extends Component {
   state = { currentIndex: 0, correctAnswers: 0, flipped: false }
@@ -48,6 +33,10 @@ class Quiz extends Component {
     const { currentIndex, correctAnswers, flipped } = this.state
 
     const currentQuestion = questions[currentIndex]
+
+    if (currentIndex === questions.length) {
+      clearLocalNotification().then(setLocalNotification)
+    }
 
     return currentQuestion
       ? <View style={styles.container}>
@@ -87,6 +76,13 @@ class Quiz extends Component {
           <Text style={styles.btnText}>Start again</Text>
         </TouchableOpacity>
 
+        <TouchableOpacity
+          style={[styles.btn, { backgroundColor: '#000' }]}
+          onPress={() => this.props.navigation.goBack()}
+          >
+          <Text style={styles.btnText}>Go back</Text>
+        </TouchableOpacity>
+
       </View>
   }
 }
@@ -97,18 +93,4 @@ function mapStateToProps (state) {
   }
 }
 
-function mapDispatchToProps (dispatch, { navigation }) {
-  const { deck } = navigation.state.params
-
-  return {
-    // remove: () =>
-    //   dispatch(
-    //     addEntry({
-    //       [entryId]: timeToString() === entryId ? getDailyReminderValue() : null
-    //     })
-    //   ),
-    // goBack: () => navigation.goBack()
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Quiz)
+export default connect(mapStateToProps)(Quiz)
