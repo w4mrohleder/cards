@@ -18,11 +18,13 @@ class AddCard extends Component {
   addCard = deckTitle => {
     const { dispatch } = this.props
 
-    addCardToDeck(deckTitle, { ...this.state }).then(() => {
-      // dispatch(addEntry({ [deckTitle]: { ...this.state } }))
-      getDecks().then(decks => dispatch(receiveDecks(decks)))
-      this.props.navigation.goBack()
-    })
+    if (this.state.question && this.state.answer) {
+      addCardToDeck(deckTitle, { ...this.state }).then(() => {
+        // dispatch(addEntry({ [deckTitle]: { ...this.state } }))
+        getDecks().then(decks => dispatch(receiveDecks(decks)))
+        this.props.navigation.goBack()
+      })
+    }
   }
 
   render () {
@@ -36,6 +38,7 @@ class AddCard extends Component {
           onChangeText={question => this.setState({ question })}
           value={this.state.question}
           placeholder='Question'
+          placeholderTextColor='#A6A6A6'
         />
 
         <TextInput
@@ -43,6 +46,7 @@ class AddCard extends Component {
           onChangeText={answer => this.setState({ answer })}
           value={this.state.answer}
           placeholder='Answer'
+          placeholderTextColor='#A6A6A6'
         />
 
         <TouchableOpacity style={[styles.btn, { backgroundColor: '#000' }]} onPress={() => this.addCard(deckTitle)}>

@@ -34,6 +34,8 @@ export default StyleSheet.create({
   },
   input: {
     height: 60,
+    alignContent: 'stretch',
+    width: '100%',
     borderColor: 'gray',
     borderWidth: 1,
     marginBottom: 10,

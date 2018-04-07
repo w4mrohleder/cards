@@ -17,11 +17,13 @@ class AddDeck extends Component {
   addDeck = () => {
     const { dispatch } = this.props
 
-    saveDeckTitle(this.state.title).then(() => {
-      // dispatch(addEntry({ [this.state.title]: { ...this.state } }))
-      getDecks().then(decks => dispatch(receiveDecks(decks)))
-      this.props.navigation.goBack()
-    })
+    if (this.state.title) {
+      saveDeckTitle(this.state.title).then(() => {
+        // dispatch(addEntry({ [this.state.title]: { ...this.state } }))
+        getDecks().then(decks => dispatch(receiveDecks(decks)))
+        this.props.navigation.goBack()
+      })
+    }
   }
 
   render () {
@@ -33,6 +35,7 @@ class AddDeck extends Component {
           onChangeText={title => this.setState({ title })}
           value={this.state.title}
           placeholder='Deck title'
+          placeholderTextColor='#A6A6A6'
         />
 
         <TouchableOpacity style={[styles.btn, { backgroundColor: '#000' }]} onPress={() => this.addDeck()}>
