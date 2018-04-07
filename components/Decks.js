@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, Text, View, TouchableOpacity, Platform, ScrollView } from 'react-native'
+import { AsyncStorage, Text, View, TouchableOpacity, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getDecks, saveDeckTitle, addCardToDeck, clear } from '../utils/api'

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, Text, View, TextInput, TouchableOpacity, Platform } from 'react-native'
+import { AsyncStorage, Text, View, TextInput, TouchableOpacity, Animated } from 'react-native'
 import { connect } from 'react-redux'
 
 import { getDecks } from '../utils/api'
@@ -15,15 +15,24 @@ class Deck extends Component {
     }
   }
 
+  state = { opacity: new Animated.Value(0) }
+
+  componentDidMount () {
+    const { opacity } = this.state
+
+    Animated.timing(opacity, { duration: 1500, toValue: 1 }).start()
+  }
+
   render () {
     const { decks } = this.props
     const { deckTitle } = this.props.navigation.state.params
+    const { opacity } = this.state
 
     const currentDeck = decks[deckTitle]
     const currentQuestions = currentDeck.questions
 
     return (
-      <View style={styles.container}>
+      <Animated.View style={[styles.container, { opacity }]}>
 
         <View style={{ marginBottom: 30 }}>
           <Text style={[styles.center, { fontWeight: 'bold', fontSize: 20, marginBottom: 20 }]}>{deckTitle}</Text>
@@ -48,7 +57,7 @@ class Deck extends Component {
 
         </View>
 
-      </View>
+      </Animated.View>
     )
   }
 }

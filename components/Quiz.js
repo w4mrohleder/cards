@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { AsyncStorage, Text, View, TextInput, Platform, TouchableOpacity } from 'react-native'
+import { AsyncStorage, Text, View, TextInput, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 import styles from '../utils/styles'
