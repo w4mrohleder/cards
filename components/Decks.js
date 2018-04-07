@@ -33,7 +33,7 @@ class Decks extends Component {
         {decks &&
           Object.values(decks).map(deck => (
             <View style={styles.deck} key={deck.title}>
-              <TouchableOpacity onPress={() => this.props.navigation.navigate('Deck', { deck })}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate('Deck', { deckTitle: deck.title })}>
                 <Text>{deck.title}</Text>
                 <Text style={{ color: '#A6A6A6' }}>({Object.values(deck.questions).length} cards)</Text>
               </TouchableOpacity>

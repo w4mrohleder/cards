@@ -21,7 +21,7 @@ class AddDeck extends Component {
       saveDeckTitle(this.state.title).then(() => {
         // dispatch(addEntry({ [this.state.title]: { ...this.state } }))
         getDecks().then(decks => dispatch(receiveDecks(decks)))
-        this.props.navigation.goBack()
+        this.props.navigation.navigate('Deck', { deckTitle: this.state.title })
       })
     }
   }

@@ -8,42 +8,44 @@ import { receiveDecks } from '../actions'
 
 class Deck extends Component {
   static navigationOptions = ({ navigation }) => {
-    const { deck: { title } } = navigation.state.params
+    const { deckTitle } = navigation.state.params
 
     return {
-      title: `Deck: ${title}`
+      title: `Deck: ${deckTitle}`
     }
   }
 
   render () {
     const { decks } = this.props
-    const { deck: { title, questions } } = this.props.navigation.state.params
+    const { deckTitle } = this.props.navigation.state.params
 
-    const currentDeck = decks[title]
+    const currentDeck = decks[deckTitle]
     const currentQuestions = currentDeck.questions
 
     return (
       <View style={styles.container}>
 
         <View style={{ marginBottom: 30 }}>
-          <Text style={{ fontWeight: 'bold', fontSize: 20, marginBottom: 20 }}>{title}</Text>
-          <Text>{currentQuestions.length} cards</Text>
+          <Text style={[styles.center, { fontWeight: 'bold', fontSize: 20, marginBottom: 20 }]}>{deckTitle}</Text>
+          <Text style={styles.center}>{currentQuestions.length} cards</Text>
         </View>
 
         <View>
           <TouchableOpacity
             style={[styles.btn, { borderWidth: 1, borderColor: '#000' }]}
-            onPress={() => this.props.navigation.navigate('AddCard', { deckTitle: title })}
+            onPress={() => this.props.navigation.navigate('AddCard', { deckTitle })}
           >
             <Text style={[styles.btnText, { color: '#000' }]}>Add Card</Text>
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.btn, { backgroundColor: '#000' }]}
-            onPress={() => this.props.navigation.navigate('Quiz', { questions: currentQuestions })}
-          >
-            <Text style={styles.btnText}>Start Quiz</Text>
-          </TouchableOpacity>
+          {currentQuestions.length &&
+            <TouchableOpacity
+              style={[styles.btn, { backgroundColor: '#000' }]}
+              onPress={() => this.props.navigation.navigate('Quiz', { questions: currentQuestions })}
+            >
+              <Text style={styles.btnText}>Start Quiz</Text>
+            </TouchableOpacity>}
+
         </View>
 
       </View>
