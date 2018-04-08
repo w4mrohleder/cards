@@ -29,6 +29,7 @@ class Deck extends Component {
     const { opacity } = this.state
 
     const currentDeck = decks[deckTitle]
+    if (!currentDeck) return <Text>loading</Text>
     const currentQuestions = currentDeck.questions
 
     return (
