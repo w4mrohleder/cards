@@ -28,7 +28,7 @@ class Deck extends Component {
     const { deckTitle } = this.props.navigation.state.params
     const { opacity } = this.state
 
-    const currentDeck = decks[deckTitle]
+    const currentDeck = decks && decks[deckTitle]
     if (!currentDeck) return <Text>loading</Text>
     const currentQuestions = currentDeck.questions
 
